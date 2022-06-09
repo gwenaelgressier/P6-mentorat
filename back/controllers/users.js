@@ -46,7 +46,7 @@ async function logUser(req, res) {
 
         const isPasswordOK = await bcrypt.compare(password, user.password);
         if (!isPasswordOK) {
-            res.status(403).send({ message: "invalide password" });
+            return res.status(403).send({ message: "invalide password" });
         }
         const token = createToken(email);
         res.status(200).send({ userId: user?._id, token: token });
