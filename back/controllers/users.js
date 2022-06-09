@@ -46,13 +46,13 @@ async function logUser(req, res) {
 
         const isPasswordOK = await bcrypt.compare(password, user.password);
         if (!isPasswordOK) {
-            res.status(403).send({ message: "Mot de passe incorrect" });
+            res.status(403).send({ message: "invalide password" });
         }
         const token = createToken(email);
         res.status(200).send({ userId: user?._id, token: token });
     } catch (err) {
         console.error(err);
-        res.status(500).send({ message: "Erreur interne" });
+        res.status(500).send({ message: "Error" });
     }
 }
 
