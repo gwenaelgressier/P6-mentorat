@@ -17,10 +17,10 @@ const productSchema = new mongoose.Schema({
 const Product = mongoose.model("Product", productSchema);
 
 /**
- * function qui affiche toute les sauces de la base de données   
- * 
- * @param {*} req 
- * @param {*} res 
+ * function qui affiche toute les sauces de la base de données
+ *
+ * @param {*} req
+ * @param {*} res
  */
 function getSauces(req, res) {
     Product.find({})
@@ -30,9 +30,9 @@ function getSauces(req, res) {
 
 /**
  * function qui recupere l'id d'une sauce
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  * @returns Product.findById(id)
  */
 function getSauce(req, res) {
@@ -42,9 +42,9 @@ function getSauce(req, res) {
 
 /**
  * function qui afficher la sauce selectioner par l'utilisateur
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 function getSauceById(req, res) {
     getSauce(req, res)
@@ -54,9 +54,9 @@ function getSauceById(req, res) {
 
 /**
  * function qui supprime une sauce de la base de données
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 function deleteSauce(req, res) {
     const { id } = req.params;
@@ -69,8 +69,8 @@ function deleteSauce(req, res) {
 
 /**
  * function qui me permet la modification de la sauce
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  */
 function modifySauce(req, res) {
     const {
@@ -89,9 +89,9 @@ function modifySauce(req, res) {
 
 /**
  * function qui permet la supression de l'image dans nos fichier
- * 
- * @param {*} product 
- * @returns 
+ *
+ * @param {*} product
+ * @returns
  */
 function deleteImage(product) {
     if (product == null) return;
@@ -102,25 +102,25 @@ function deleteImage(product) {
 
 /**
  * function qui permet de gerer la modification de mon image
- * @param {*} hasNewImage 
- * @param {*} req 
- * @returns 
+ * @param {*} hasNewImage
+ * @param {*} req
+ * @returns
  */
 function makePayload(hasNewImage, req) {
     console.log("hasNewImage:", hasNewImage);
     if (!hasNewImage) return req.body;
     const payload = JSON.parse(req.body.sauce);
     payload.imageUrl = makeImageUrl(req, req.file.fileName);
-    console.log("NOUVELLE IMAGE A GERER");
-    console.log("voici le payload:", payload);
+    console.log("NEW IMAGE TO MANAGE");
+    console.log("the payload:", payload);
     return payload;
 }
 
 /**
  * function de verifications
- * 
- * @param {*} product 
- * @param {*} res 
+ *
+ * @param {*} product
+ * @param {*} res
  * @returns Promise.resolve
  */
 function sendClientResponse(product, res) {
@@ -135,10 +135,10 @@ function sendClientResponse(product, res) {
 }
 
 /**
- * function qui cree url de mon image 
- * 
- * @param {*} req 
- * @param {*} fileName 
+ * function qui cree url de mon image
+ *
+ * @param {*} req
+ * @param {*} fileName
  * @returns l url de mon image
  */
 function makeImageUrl(req, fileName) {
@@ -147,9 +147,9 @@ function makeImageUrl(req, fileName) {
 
 /**
  * function qui sert a la creation de mes sauces
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 function createSauce(req, res) {
     const { body, file } = req;
@@ -178,10 +178,10 @@ function createSauce(req, res) {
 
 /**
  * function qui permet de liker une sauce
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
 function likeSauce(req, res) {
     const { like, userId } = req.body;
@@ -197,12 +197,12 @@ function likeSauce(req, res) {
 
 /**
  * function qui permet de modifier le like
- * 
- * @param {*} product 
- * @param {*} like 
- * @param {*} userId 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} product
+ * @param {*} like
+ * @param {*} userId
+ * @param {*} res
+ * @returns
  */
 function updateVote(product, like, userId, res) {
     if (like === 1 || like === -1) return incrementVote(product, userId, like);
@@ -211,11 +211,11 @@ function updateVote(product, like, userId, res) {
 
 /**
  * function qui reset le like en cas de mauvaise manip
- * 
- * @param {*} product 
- * @param {*} userId 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} product
+ * @param {*} userId
+ * @param {*} res
+ * @returns
  */
 function resetVote(product, userId, res) {
     const { usersLiked, usersDisliked } = product;
@@ -240,11 +240,11 @@ function resetVote(product, userId, res) {
 
 /**
  * function qui incremente les likes et dilikes
- * 
- * @param {*} product 
- * @param {*} userId 
- * @param {*} like 
- * @returns 
+ *
+ * @param {*} product
+ * @param {*} userId
+ * @param {*} like
+ * @returns
  */
 function incrementVote(product, userId, like) {
     const { usersLiked, usersDisliked } = product;
