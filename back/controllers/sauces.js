@@ -47,6 +47,7 @@ function getSauce(req, res) {
  * @param {*} res
  */
 function getSauceById(req, res) {
+    console.log("test");
     getSauce(req, res)
         .then((product) => sendClientResponse(product, res))
         .catch((err) => res.status(500).send(err));
@@ -96,8 +97,9 @@ function modifySauce(req, res) {
 function deleteImage(product) {
     if (product == null) return;
     console.log("DELETE IMAGE", product);
-    const imageToDelete = product.imageUrl.split("/").at(-1);
-    return unlink("images/" + imageToDelete);
+    const imageToDelete = product.imageUrl.split("/");
+    let img = imageToDelete.slice(-1).pop();
+    return unlink("images/" + img);
 }
 
 /**

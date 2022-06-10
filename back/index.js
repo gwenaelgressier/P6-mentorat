@@ -3,17 +3,19 @@ const { saucesRouter } = require("./routers/sauces.router");
 const { authRouter } = require("./routers/auth.router");
 const port = 3000;
 const path = require("path");
+const bodyParser = require("body-parser");
 
 //conection to database
 require("./mongo");
 
 //middleware
+app.use(bodyParser.json());
 app.use("/api/sauces", saucesRouter);
 app.use("/api/auth", authRouter);
 
 //Routes
 app.get("/", (req, res) => {
-    res.send("Go to the port 4200!!!");
+    res.send("Hello World!");
 });
 
 //listen
