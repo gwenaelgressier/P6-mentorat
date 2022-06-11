@@ -83,7 +83,9 @@ function modifySauce(req, res) {
 
     Product.findByIdAndUpdate(id, payload)
         .then((dbResponse) => sendClientResponse(dbResponse, res))
-        .then((product) => deleteImage(product))
+        .then((product) => {
+            if (hasNewImage == true) deleteImage(product);
+        })
         .then((res) => console.log("FILE DELETED", res))
         .catch((err) => console.error("PROBLEM UPDATING", err));
 }
