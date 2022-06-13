@@ -24,7 +24,7 @@ const Product = mongoose.model("Product", productSchema);
  */
 function getSauces(req, res) {
     Product.find({})
-        .then((products) => res.send(products))
+        .then((products) => res.status(200).send(products))
         .catch((error) => res.status(500).send(error));
 }
 
