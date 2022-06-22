@@ -214,7 +214,7 @@ function updateVote(product, like, userId, res) {
 }
 
 /**
- * function qui reset le like en cas de mauvaise manip
+ * function qui reset le like
  *
  * @param {*} product
  * @param {*} userId

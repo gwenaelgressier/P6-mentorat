@@ -1,5 +1,13 @@
 const jwt = require("jsonwebtoken");
 
+/**
+ * function qui permet la verification des token
+ *
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns
+ */
 function authenticateUser(req, res, next) {
     console.log("authenticate user");
     const header = req.header("Authorization");
